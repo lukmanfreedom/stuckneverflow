@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use App\Answer;
 use Auth;
 
 class QuestionController extends Controller
@@ -34,8 +35,14 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = Question::where('id', $id)->with('user')->first();
+        $answers = Answer::where('question_id', $id)->with('user')->get();
 
-        return view('questions.id', ['question' => $question]);
+        $payload = [
+            'question' => $question,
+            'answers' => $answers
+        ];
+
+        return view('questions.id', $payload);
     }
 
     public function edit($id)

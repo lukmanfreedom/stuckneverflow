@@ -15,6 +15,7 @@ Make sure you have composer run on your computer.
 After pulling this repo run this command before serve using php artisan:
 
 - composer require laravel/ui
+- composer require doctrine/dbal
 - php artisan ui bootstrap
 - npm install && npm run dev
 

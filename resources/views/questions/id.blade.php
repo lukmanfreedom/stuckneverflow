@@ -61,41 +61,46 @@
 
                         <br>
                         <div>
-                            <h4>1 Jawaban</h4>
+                            <h4>{{ count($answers) }} Jawaban</h4>
                         </div>
                         <br>
 
-                        <div class="row">
-                            <div class="col-1">
-                              <button type="button" class="btn btn-link btn-sm">
-                                  <i class='fas fa-caret-up' style='font-size:36px'></i>
-                              </button>
-                              <span style='font-size:24px'>0</span>
-                              <button type="button" class="btn btn-link btn-sm">
-                                  <i class='fas fa-caret-down' style='font-size:36px'></i>
-                              </button>
-                            </div>
-
-                            <div class="col-11">
-                                {{$question->content}}
-
-                                <br><br><div class="text-end">
-                                    <p class="text-right">Dijawab oleh <br>{{$question->user->name}}</p>
+                        @foreach ($answers as $answer)
+                            <div class="row">
+                                <div class="col-1">
+                                  <button type="button" class="btn btn-link btn-sm">
+                                      <i class='fas fa-caret-up' style='font-size:36px'></i>
+                                  </button>
+                                  <span style='font-size:24px'>0</span>
+                                  <button type="button" class="btn btn-link btn-sm">
+                                      <i class='fas fa-caret-down' style='font-size:36px'></i>
+                                  </button>
                                 </div>
 
-                                <hr>
-                                <small class="form-text text-muted">
-                                    comment goes here
-                                </small>
-                            </div>
-                        </div>
+                                <div class="col-11">
+                                    {{$answer->content}}
 
-                        <hr>
+                                    <br><br><div class="text-end">
+                                        <p class="text-right">Dijawab oleh <br>{{$answer->user->name}}</p>
+                                    </div>
+
+                                    <hr>
+                                    <small class="form-text text-muted">
+                                        comment goes here
+                                    </small>
+                                </div>
+                            </div>
+
+                            <hr>
+                        @endforeach
 
                         <br>
                         <div>
                             <h4>Jawaban Anda</h4>
                         </div>
+
+                        <form action="{{url('answers')}}" method="post">
+                        @csrf
 
                         <div class="form-group">
                             <textarea
@@ -106,7 +111,11 @@
                                 id="questionContent"
                             ></textarea>
                         </div>
+
+                        <input type="hidden" name="question_id" value="{{$question->id}}">
+
                         <button type="submit" class="btn btn-primary">Simpan Jawaban</button>
+                        </form>
                     </div>
 
                     <div class="3">
