@@ -4,6 +4,9 @@
 <div class="container">
     <h3>Ajukan Pertanyaan</h3>
 
+    <form action="{{url('questions')}}" method="post">
+    @csrf
+
     <div class="row mt-5">
         <div class="col-8">
             <div class="card">
@@ -16,6 +19,7 @@
                         </small>
                         <input
                             type="text"
+                            name="title"
                             class="form-control form-control-sm"
                             id="questionTitle"
                             placeholder="Contohnya apakah benar buwong puyoh dapat terbang?"
@@ -30,7 +34,7 @@
                         </small>
                         <textarea
                             class="form-control form-control-sm"
-                            name="name"
+                            name="content"
                             rows="8"
                             cols="95"
                             id="questionContent"
@@ -45,6 +49,7 @@
                         </small>
                         <input
                             type="text"
+                            name="tags"
                             class="form-control form-control-sm"
                             id="questionTag"
                             placeholder="Contohnya apakah benar buwong puyoh dapat terbang?"
@@ -64,7 +69,8 @@
     </div>
 
     <div class="mt-3">
-        <button type="button" class="btn btn-primary">Simpan Pertanyaan</button>
+        <button type="submit" class="btn btn-primary">Simpan Pertanyaan</button>
     </div>
+    </form>
 </div>
 @endsection
