@@ -25,6 +25,14 @@
                         <a href="/questions/ask" class="btn btn-primary" role="button">Ajukan Pertanyaan</a>
                     </div>
                 </div>
+
+                @foreach ($questions as $question)
+                    <div class="card">
+                        <div class="card-body">
+                            <p>{{$question->title}}</p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
             <div class="col-2">

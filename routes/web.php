@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/questions/ask', 'QuestionController@index')->name('ask');
 Route::post('/questions',  'QuestionController@store');
+Route::get('/questions/{id}', 'QuestionController@show');

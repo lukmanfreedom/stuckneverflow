@@ -33,7 +33,8 @@ class QuestionController extends Controller
 
     public function show($id)
     {
-        //
+        $question = Question::find($id);
+        return view('questions.id', ['question' => $question]);
     }
 
     public function edit($id)
