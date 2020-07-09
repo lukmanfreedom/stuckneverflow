@@ -31,7 +31,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-auto text-center">
-                                    0<br>
+                                    {{count($question->upvotes) - count($question->downvotes)}}
+                                    <br>
                                     <small>Vote</small>
                                 </div>
 

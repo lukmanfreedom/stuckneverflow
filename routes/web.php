@@ -26,3 +26,4 @@ Route::get('/comments', 'CommentController@index')->name('comments');
 Route::post('/comments', 'CommentController@store');
 Route::get('/questions/{id}/edit', 'QuestionController@edit');
 Route::put('/questions/{id}', 'QuestionController@update');
+Route::post('/votes', 'VoteController@store');

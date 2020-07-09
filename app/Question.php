@@ -21,4 +21,12 @@ class Question extends Model
     public function comments() {
         return $this->hasMany('App\Comment', 'question_id');
     }
+
+    public function upvotes() {
+        return $this->hasMany('App\Vote', 'question_id')->where('is_upvote', '=', 'true');
+    }
+
+    public function downvotes() {
+        return $this->hasMany('App\Vote', 'question_id')->where('is_downvote', '=', 'true');
+    }
 }

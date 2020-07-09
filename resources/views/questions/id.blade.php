@@ -36,13 +36,37 @@
                     <div class="col-9">
                         <div class="row">
                             <div class="col-md-auto text-center">
-                              <button type="button" class="btn btn-link btn-sm">
-                                  <i class='fas fa-caret-up' style='font-size:36px'></i>
-                              </button>
-                              <br><span style='font-size:24px'>0</span><br>
-                              <button type="button" class="btn btn-link btn-sm">
-                                  <i class='fas fa-caret-down' style='font-size:36px'></i>
-                              </button>
+                              <form action="{{url('votes')}}" method="post">
+                                  @csrf
+                                  <input name="question_id" type="hidden" value="{{$question->id}}">
+                                  <input name="user_id" type="hidden" value="{{$user->id}}">
+                                  <input name="type" type="hidden" value="is_upvote">
+
+                                  <button
+                                      type="submit"
+                                      class="btn btn-link btn-sm"
+                                      {{$question->user_id == $user->id ? "disabled" : ""}}
+                                  ><i class='fas fa-caret-up' style='font-size:36px'></i>
+                                  </button>
+                              </form>
+
+                              <span style='font-size:24px'>
+                                  {{count($question->upvotes) - count($question->downvotes)}}
+                              </span>
+
+                              <form action="{{url('votes')}}" method="post">
+                                  @csrf
+                                  <input name="question_id" type="hidden" value="{{$question->id}}">
+                                  <input name="user_id" type="hidden" value="{{$user->id}}">
+                                  <input name="type" type="hidden" value="is_downvote">
+
+                                  <button
+                                      type="submit"
+                                      class="btn btn-link btn-sm"
+                                      {{$question->user_id == $user->id ? "disabled" : ""}}
+                                  ><i class='fas fa-caret-down' style='font-size:36px'></i>
+                                  </button>
+                              </form>
                             </div>
 
                             <div class="col">
@@ -94,11 +118,11 @@
                         @foreach ($answers as $answer)
                             <div class="row">
                                 <div class="col-md-auto text-center">
-                                  <button type="button" class="btn btn-link btn-sm">
+                                  <button type="button" class="btn btn-link btn-sm" {{$answer->user_id == $user->id ? "disabled" : ""}}>
                                       <i class='fas fa-caret-up' style='font-size:36px'></i>
                                   </button>
                                   <br><span style='font-size:24px'>0</span><br>
-                                  <button type="button" class="btn btn-link btn-sm">
+                                  <button type="button" class="btn btn-link btn-sm" {{$answer->user_id == $user->id ? "disabled" : ""}}>
                                       <i class='fas fa-caret-down' style='font-size:36px'></i>
                                   </button>
                                 </div>

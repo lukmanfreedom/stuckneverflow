@@ -36,17 +36,29 @@ class QuestionController extends Controller
     {
         $user = Auth::user();
         $question = Question::where('id', $id)
-                      ->with(['user', 'comments.user'])
+                      ->with([
+                          'user',
+                          'comments.user',
+                          'upvotes',
+                          'downvotes'
+                      ])
                       ->first();
 
         $answers = Answer::where('question_id', $id)
                       ->with(['user', 'comments.user'])
                       ->get();
 
+        $button_status = "";
+
+        if($user->id == $question->user_id) {
+            $button_status = "disabled";
+        }
+
         $payload = [
             'question' => $question,
             'answers' => $answers,
-            'user' => $user
+            'user' => $user,
+            'button_status' => $button_status
         ];
 
         return view('questions.id', $payload);
