@@ -29,7 +29,7 @@
                 @foreach ($questions as $question)
                     <div class="card">
                         <div class="card-body">
-                            <p>{{$question->title}}</p>
+                            <a href="/questions/{{$question->id}}" style="text-decoration: none">{{$question->title}}</a>
                         </div>
                     </div>
                 @endforeach
