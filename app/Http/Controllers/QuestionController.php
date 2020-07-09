@@ -34,8 +34,13 @@ class QuestionController extends Controller
 
     public function show($id)
     {
-        $question = Question::where('id', $id)->with('user')->first();
-        $answers = Answer::where('question_id', $id)->with('user')->get();
+        $question = Question::where('id', $id)
+                      ->with(['user', 'comments.user'])
+                      ->first();
+
+        $answers = Answer::where('question_id', $id)
+                      ->with(['user', 'comments.user'])
+                      ->get();
 
         $payload = [
             'question' => $question,

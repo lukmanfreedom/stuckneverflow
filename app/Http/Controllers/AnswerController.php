@@ -18,7 +18,7 @@ class AnswerController extends Controller
         $answer->content = $request->content;
         $answer->save();
 
-        return redirect()->to('questions/'.$request->question_id);
+        return redirect()->to('questions/' . $request->question_id);
     }
 
     public function show($id)

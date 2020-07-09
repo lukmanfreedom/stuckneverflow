@@ -22,3 +22,5 @@ Route::get('/questions/ask', 'QuestionController@index')->name('ask');
 Route::post('/questions',  'QuestionController@store');
 Route::get('/questions/{id}', 'QuestionController@show')->name('questions/{id}');
 Route::post('/answers',  'AnswerController@store');
+Route::get('/comments', 'CommentController@index')->name('comments');
+Route::post('/comments', 'CommentController@store');

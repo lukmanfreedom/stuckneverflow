@@ -52,9 +52,16 @@
                                     <p class="text-right">Ditanyakan oleh <br>{{$question->user->name}}</p>
                                 </div>
 
+                                @foreach ($question->comments as $comment)
+                                    <hr>
+                                        <small class="form-text text-muted">
+                                            {{$comment->content}} - {{$comment->user->name}}
+                                        </small>
+                                    </hr>
+                                @endforeach
                                 <hr>
                                 <small class="form-text text-muted">
-                                    comment goes here
+                                    <a href="/comments?question_id={{$question->id}}" style="text-decoration: none">add comment</a>
                                 </small>
                             </div>
                         </div>
@@ -84,9 +91,16 @@
                                         <p class="text-right">Dijawab oleh <br>{{$answer->user->name}}</p>
                                     </div>
 
+                                    @foreach ($answer->comments as $comment)
+                                        <hr>
+                                            <small class="form-text text-muted">
+                                                {{$comment->content}} - {{$comment->user->name}}
+                                            </small>
+                                        </hr>
+                                    @endforeach
                                     <hr>
                                     <small class="form-text text-muted">
-                                        comment goes here
+                                        <a href="/comments?answer_id={{$answer->id}}" style="text-decoration: none">add comment</a>
                                     </small>
                                 </div>
                             </div>
