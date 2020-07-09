@@ -34,6 +34,7 @@ class QuestionController extends Controller
 
     public function show($id)
     {
+        $user = Auth::user();
         $question = Question::where('id', $id)
                       ->with(['user', 'comments.user'])
                       ->first();
@@ -44,7 +45,8 @@ class QuestionController extends Controller
 
         $payload = [
             'question' => $question,
-            'answers' => $answers
+            'answers' => $answers,
+            'user' => $user
         ];
 
         return view('questions.id', $payload);
@@ -52,12 +54,20 @@ class QuestionController extends Controller
 
     public function edit($id)
     {
-        //
+        $question = Question::where('id', $id)->first();
+
+        return view('questions.edit', ['question' => $question]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::find($id);
+
+        $question->title = $request->title;
+        $question->content = $request->content;
+        $question->save();
+
+        return redirect()->to('questions/' . $id);
     }
 
     // this function are optional

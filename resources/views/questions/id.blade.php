@@ -47,9 +47,28 @@
 
                             <div class="col">
                                 {{$question->content}}
+                                <br>
+                                <div class="text-right">
+                                    @if ($question->created_at != $question->updated_at)
+                                        - edited
+                                    @endif
+                                </div>
 
-                                <br><br><div class="text-end">
-                                    <p class="text-right">Ditanyakan oleh <br>{{$question->user->name}}</p>
+                                <br><br>
+                                <div class="d-flex bd-highlight mb-3">
+                                    <div class="bd-highlight">
+                                        @if ($question->user->id == $user->id)
+                                            <a href="/questions/{{$question->id}}/edit" style="text-decoration: none">
+                                                <small>Ubah</small>
+                                            </a>
+                                        @endif
+                                    </div>
+
+                                    <div class="ml-auto bd-highlight">
+                                        <small>
+                                            <p class="text-right">Ditanyakan oleh <br>{{$question->user->name}}</p>
+                                        </small>
+                                    </div>
                                 </div>
 
                                 @foreach ($question->comments as $comment)
@@ -88,7 +107,9 @@
                                     {{$answer->content}}
 
                                     <br><br><div class="text-end">
-                                        <p class="text-right">Dijawab oleh <br>{{$answer->user->name}}</p>
+                                        <small>
+                                            <p class="text-right">Dijawab oleh <br>{{$answer->user->name}}</p>
+                                        </small>
                                     </div>
 
                                     @foreach ($answer->comments as $comment)
