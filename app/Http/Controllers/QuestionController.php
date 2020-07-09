@@ -45,7 +45,12 @@ class QuestionController extends Controller
                       ->first();
 
         $answers = Answer::where('question_id', $id)
-                      ->with(['user', 'comments.user'])
+                      ->with([
+                          'user',
+                          'comments.user',
+                          'upvotes',
+                          'downvotes'
+                      ])
                       ->get();
 
         $button_status = "";
