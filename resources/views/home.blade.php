@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="ml-auto p-2 bd-highlight">
-                        <button type="button" class="btn btn-primary">Ajukan Pertanyaan</button>
+                        <a href="/questions/ask" class="btn btn-primary" role="button">Ajukan Pertanyaan</a>
                     </div>
                 </div>
             </div>
