@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
+        $questions = Question::with('user')->with('answers')->get();
         return view('home', ['questions' => $questions]);
     }
 }

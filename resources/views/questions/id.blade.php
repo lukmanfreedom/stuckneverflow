@@ -35,17 +35,17 @@
                 <div class="row">
                     <div class="col-9">
                         <div class="row">
-                            <div class="col-1">
+                            <div class="col-md-auto text-center">
                               <button type="button" class="btn btn-link btn-sm">
                                   <i class='fas fa-caret-up' style='font-size:36px'></i>
                               </button>
-                              <span style='font-size:24px'>0</span>
+                              <br><span style='font-size:24px'>0</span><br>
                               <button type="button" class="btn btn-link btn-sm">
                                   <i class='fas fa-caret-down' style='font-size:36px'></i>
                               </button>
                             </div>
 
-                            <div class="col-11">
+                            <div class="col">
                                 {{$question->content}}
 
                                 <br><br><div class="text-end">
@@ -67,17 +67,17 @@
 
                         @foreach ($answers as $answer)
                             <div class="row">
-                                <div class="col-1">
+                                <div class="col-md-auto text-center">
                                   <button type="button" class="btn btn-link btn-sm">
                                       <i class='fas fa-caret-up' style='font-size:36px'></i>
                                   </button>
-                                  <span style='font-size:24px'>0</span>
+                                  <br><span style='font-size:24px'>0</span><br>
                                   <button type="button" class="btn btn-link btn-sm">
                                       <i class='fas fa-caret-down' style='font-size:36px'></i>
                                   </button>
                                 </div>
 
-                                <div class="col-11">
+                                <div class="col">
                                     {{$answer->content}}
 
                                     <br><br><div class="text-end">

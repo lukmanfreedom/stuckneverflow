@@ -29,7 +29,25 @@
                 @foreach ($questions as $question)
                     <div class="card">
                         <div class="card-body">
-                            <a href="/questions/{{$question->id}}" style="text-decoration: none">{{$question->title}}</a>
+                            <div class="row">
+                                <div class="col-md-auto text-center">
+                                    0<br>
+                                    <small>Vote</small>
+                                </div>
+
+                                <div class="col-md-auto text-center">
+                                    {{ count($question->answers) }}<br>
+                                    <small>Jawaban</small>
+                                </div>
+
+                                <div class="col">
+                                    <a href="/questions/{{$question->id}}" style="text-decoration: none">{{$question->title}}</a>
+
+                                    <div class="text-right">
+                                        <small class="text-muted">Ditanyakan oleh {{$question->user->name}}</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
