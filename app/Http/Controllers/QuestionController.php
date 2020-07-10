@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Answer;
+use App\User;
 use Auth;
 
 class QuestionController extends Controller
@@ -53,17 +54,20 @@ class QuestionController extends Controller
                       ])
                       ->get();
 
-        $button_status = "";
-
-        if($user->id == $question->user_id) {
-            $button_status = "disabled";
-        }
+        $selected_answer = Answer::where('id', $question->selected_answer)
+                              ->with([
+                                  'user',
+                                  'comments.user',
+                                  'upvotes',
+                                  'downvotes'
+                              ])
+                              ->first();
 
         $payload = [
             'question' => $question,
             'answers' => $answers,
-            'user' => $user,
-            'button_status' => $button_status
+            'selected_answer' => $selected_answer,
+            'user' => $user
         ];
 
         return view('questions.id', $payload);
@@ -80,16 +84,30 @@ class QuestionController extends Controller
     {
         $question = Question::find($id);
 
-        $question->title = $request->title;
-        $question->content = $request->content;
-        $question->save();
+        if(isset($request->answer)) {
+            $request->answer = json_decode($request->answer);
+
+            if($question->selected_answer == null) {
+                $selected_answer = $request->answer->id;
+                $point = 15;
+            } else {
+                $selected_answer = null;
+                $point = -15;
+            }
+
+            $question->selected_answer = $selected_answer;
+            $question->save();
+
+            $owner = User::find($request->answer->user_id);
+            $owner->reputation += $point;
+            $owner->save();
+
+        } else {
+            $question->title = $request->title;
+            $question->content = $request->content;
+            $question->save();
+        }
 
         return redirect()->to('questions/' . $id);
     }
-
-    // this function are optional
-    // public function destroy($id)
-    // {
-    //     //
-    // }
 }

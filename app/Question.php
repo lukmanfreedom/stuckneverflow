@@ -8,10 +8,14 @@ class Question extends Model
 {
     protected $table = 'questions';
 
-    protected $fillable = ['title', 'content', 'user_id'];
+    protected $fillable = ['title', 'content', 'user_id', 'selected_answer'];
 
     public function user() {
         return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function selectedAnswer() {
+        return $this->belongsTo('App\Answer', 'selected_answer');
     }
 
     public function answers() {

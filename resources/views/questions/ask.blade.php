@@ -50,9 +50,9 @@
                         <input
                             type="text"
                             name="tags"
-                            class="form-control form-control-sm"
-                            id="questionTag"
-                            placeholder="Contohnya apakah benar buwong puyoh dapat terbang?"
+                            class="form-control"
+                            data-role="tagsinput"
+                            value="istanbul"
                         >
                     </div>
                 </div>
