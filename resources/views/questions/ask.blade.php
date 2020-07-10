@@ -48,10 +48,9 @@
                         <input
                             type="text"
                             name="tags"
-                            class="form-control"
                             data-role="tagsinput"
-                            value="istanbul"
-                        >
+                            class="form-control form-control-sm"
+                        />
                     </div>
                 </div>
             </div>

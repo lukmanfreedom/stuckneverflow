@@ -13,16 +13,26 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    {{-- <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .bootstrap-tagsinput .tag {
+            background: #428bca;
+            border: 1px solid #428bca;
+            padding: 0 6px;
+            margin-right: 2px;
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
