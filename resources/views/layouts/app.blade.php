@@ -13,7 +13,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script> --}}
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -80,5 +81,10 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        setTimeout(function(){
+            CKEDITOR.replace( 'content' );
+        },400);
+    </script>
 </body>
 </html>

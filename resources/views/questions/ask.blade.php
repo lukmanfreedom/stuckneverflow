@@ -35,9 +35,7 @@
                         <textarea
                             class="form-control form-control-sm"
                             name="content"
-                            rows="8"
-                            cols="95"
-                            id="questionContent"
+                            id="content"
                         ></textarea>
                     </div><br>
 

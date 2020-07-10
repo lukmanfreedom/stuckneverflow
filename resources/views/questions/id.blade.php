@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="col">
-                                {{$question->content}}
+                                {!! $question->content !!}
                                 <br>
                                 <div class="text-right">
                                     @if ($question->created_at != $question->updated_at)
@@ -102,7 +102,7 @@
                                 @foreach ($question->comments as $comment)
                                     <hr>
                                         <small class="form-text text-muted">
-                                            {{$comment->content}} - {{$comment->user->name}}
+                                            {!! $comment->content !!} - {{$comment->user->name}}
                                         </small>
                                     </hr>
                                 @endforeach
@@ -158,7 +158,7 @@
                                 </div>
 
                                 <div class="col">
-                                    {{$selected_answer->content}}
+                                    {!! $selected_answer->content !!}
 
                                     <br><br>
                                     <div class="d-flex bd-highlight mb-3">
@@ -193,7 +193,7 @@
                                     @foreach ($selected_answer->comments as $comment)
                                         <hr>
                                             <small class="form-text text-muted">
-                                                {{$comment->content}} - {{$comment->user->name}}
+                                                {!! $comment->content !!} - {{$comment->user->name}}
                                             </small>
                                         </hr>
                                     @endforeach
@@ -252,7 +252,7 @@
                                 </div>
 
                                 <div class="col">
-                                    {{$answer->content}}
+                                    {!! $answer->content !!}
 
                                     <br><br>
                                     <div class="d-flex bd-highlight mb-3">
@@ -287,7 +287,7 @@
                                     @foreach ($answer->comments as $comment)
                                         <hr>
                                             <small class="form-text text-muted">
-                                                {{$comment->content}} - {{$comment->user->name}}
+                                                {!! $comment->content !!} - {{$comment->user->name}}
                                             </small>
                                         </hr>
                                     @endforeach
