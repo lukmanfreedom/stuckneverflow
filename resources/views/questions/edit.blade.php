@@ -52,10 +52,10 @@
                         <input
                             type="text"
                             name="tags"
+                            data-role="tagsinput"
                             class="form-control form-control-sm"
-                            id="questionTag"
-                            placeholder="Contohnya apakah benar buwong puyoh dapat terbang?"
-                        >
+                            value="{{$tags}}"
+                        />
                     </div>
                 </div>
             </div>

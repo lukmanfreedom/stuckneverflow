@@ -44,8 +44,24 @@
                                 <div class="col">
                                     <a href="/questions/{{$question->id}}" style="text-decoration: none">{{$question->title}}</a>
 
-                                    <div class="text-right">
-                                        <small class="text-muted">Ditanyakan oleh {{$question->user->name}}</small>
+                                    <div class="d-flex bd-highlight mb-3">
+                                        <div class="bd-highlight">
+                                            @foreach ($question->questionTag as $key)
+                                                <a href="#" class="badge badge-primary">{{$key->tag->name}}</a>
+                                            @endforeach
+                                        </div>
+
+                                        <div class="ml-auto bd-highlight">
+                                            <small>
+                                                <div class="text-right">
+                                                    <small class="text-muted">
+                                                        Ditanyakan oleh
+                                                        <a href="#" style="text-decoration: none;">{{$question->user->name}}</a>
+                                                        {{$question->user->reputation}}
+                                                    </small>
+                                                </div>
+                                            </small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

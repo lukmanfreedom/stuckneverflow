@@ -33,4 +33,8 @@ class Question extends Model
     public function downvotes() {
         return $this->hasMany('App\Vote', 'question_id')->where('is_downvote', '=', 'true');
     }
+
+    public function questionTag() {
+        return $this->hasMany('App\QuestionTag', 'question_id');
+    }
 }

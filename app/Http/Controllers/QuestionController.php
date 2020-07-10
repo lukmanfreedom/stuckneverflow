@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Question;
 use App\Answer;
 use App\User;
+use App\Tag;
+use App\QuestionTag;
 use Auth;
 
 class QuestionController extends Controller
@@ -30,6 +32,29 @@ class QuestionController extends Controller
         $question->user_id = $user->id;
         $question->save();
 
+        $tags = explode(',', $request->tags);
+
+        foreach ($tags as $key => $value) {
+            $value = strtolower($value);
+
+            $model = Tag::where('name', 'like', $value)->first();
+
+            if ($model == null) {
+                $tag = new Tag;
+                $tag->name = $value;
+                $tag->save();
+
+                $tag_id = $tag->id;
+            } else {
+                $tag_id = $model->id;
+            }
+
+            $question_tag = new QuestionTag;
+            $question_tag->question_id = $question->id;
+            $question_tag->tag_id = $tag_id;
+            $question_tag->save();
+        }
+
         return redirect()->route('home');
     }
 
@@ -41,7 +66,8 @@ class QuestionController extends Controller
                           'user',
                           'comments.user',
                           'upvotes',
-                          'downvotes'
+                          'downvotes',
+                          'questionTag.tag'
                       ])
                       ->first();
 
@@ -75,9 +101,14 @@ class QuestionController extends Controller
 
     public function edit($id)
     {
-        $question = Question::where('id', $id)->first();
+        $question = Question::where('id', $id)->with(['questionTag.tag'])->first();
+        $tags = "";
 
-        return view('questions.edit', ['question' => $question]);
+        foreach ($question->questionTag as $key) {
+            $tags .= $key->tag->name . ',';
+        }
+
+        return view('questions.edit', ['question' => $question, 'tags' => $tags]);
     }
 
     public function update(Request $request, $id)
@@ -85,6 +116,7 @@ class QuestionController extends Controller
         $question = Question::find($id);
 
         if(isset($request->answer)) {
+            // this block used to give reputation
             $request->answer = json_decode($request->answer);
 
             if($question->selected_answer == null) {
@@ -103,9 +135,34 @@ class QuestionController extends Controller
             $owner->save();
 
         } else {
+            // normal update
             $question->title = $request->title;
             $question->content = $request->content;
             $question->save();
+
+            $tags = explode(',', $request->tags);
+            $question_tag = QuestionTag::where('question_id', $id)->delete();
+
+            foreach ($tags as $key => $value) {
+                $value = strtolower($value);
+
+                $model = Tag::where('name', 'like', $value)->first();
+
+                if ($model == null) {
+                    $tag = new Tag;
+                    $tag->name = $value;
+                    $tag->save();
+
+                    $tag_id = $tag->id;
+                } else {
+                    $tag_id = $model->id;
+                }
+
+                $question_tag = new QuestionTag;
+                $question_tag->question_id = $question->id;
+                $question_tag->tag_id = $tag_id;
+                $question_tag->save();
+            }
         }
 
         return redirect()->to('questions/' . $id);

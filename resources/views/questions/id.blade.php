@@ -71,12 +71,14 @@
 
                             <div class="col">
                                 {!! $question->content !!}
-                                <br>
-                                <div class="text-right">
-                                    @if ($question->created_at != $question->updated_at)
-                                        - edited
-                                    @endif
-                                </div>
+
+                                @if ($question->created_at != $question->updated_at)
+                                    <br><div class="text-right">- edited</div>
+                                @endif
+
+                                @foreach ($question->questionTag as $key)
+                                    <a href="#" class="badge badge-primary">{{$key->tag->name}}</a>
+                                @endforeach
 
                                 <br><br>
                                 <div class="d-flex bd-highlight mb-3">

@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $questions = Question::with(['user', 'answers', 'upvotes', 'downvotes'])->get();
+        $questions = Question::with(['user', 'answers', 'upvotes', 'downvotes', 'questionTag.tag'])->get();
         return view('home', ['questions' => $questions]);
     }
 }
