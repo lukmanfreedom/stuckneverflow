@@ -51,6 +51,25 @@
 
                     </ul>
 
+                    @guest
+
+                    @else
+                        <div class="w-50 pr-5">
+                            <div class="input-group w-100">
+                                @if (isset($search))
+                                    <input type="text" class="form-control" aria-describedby="search" id="search" placeholder="Apa yang mau kamu cari?" name="search" value={{$search}}>
+                                @else
+                                    <input type="text" class="form-control" aria-describedby="search" id="search" placeholder="Apa yang mau kamu cari?" name="search" value="">
+                                @endif
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button" onclick="search()">
+                                        <i class='fas fa-search'></i> Cari
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @endguest
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -95,6 +114,11 @@
         setTimeout(function(){
             CKEDITOR.replace( 'content' );
         },400);
+
+        function search() {
+            var keyword = document.getElementById("search").value;
+            window.location.href = "/home?search=" + keyword;
+        }
     </script>
 </body>
 </html>

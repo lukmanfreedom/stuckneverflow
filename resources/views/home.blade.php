@@ -30,16 +30,24 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-auto text-center">
+                                <div class="col-md-auto text-center pt-1">
                                     {{count($question->upvotes) - count($question->downvotes)}}
                                     <br>
                                     <small>Vote</small>
                                 </div>
 
-                                <div class="col-md-auto text-center">
-                                    {{ count($question->answers) }}<br>
-                                    <small>Jawaban</small>
-                                </div>
+                                @if ($question->selected_answer != null)
+                                    <div class="col-md-auto text-center bg-success pt-1 rounded">
+                                        <span class="text-white">{{ count($question->answers) }}</span><br>
+                                        <small class="text-white">Jawaban</small>
+                                    </div>
+                                @else
+                                    <div class="col-md-auto text-center pt-1">
+                                        <span>{{ count($question->answers) }}</span><br>
+                                        <small>Jawaban</small>
+                                    </div>
+                                @endif
+
 
                                 <div class="col">
                                     <a href="/questions/{{$question->id}}" style="text-decoration: none">{{$question->title}}</a>
@@ -47,7 +55,7 @@
                                     <div class="d-flex bd-highlight mb-3">
                                         <div class="bd-highlight">
                                             @foreach ($question->questionTag as $key)
-                                                <a href="#" class="badge badge-primary">{{$key->tag->name}}</a>
+                                                <a href="home?tag={{$key->tag->name}}" class="badge badge-primary">{{$key->tag->name}}</a>
                                             @endforeach
                                         </div>
 
